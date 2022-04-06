@@ -1,7 +1,10 @@
 package com.collecticats.catservice;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 
 public class Cat {
@@ -11,14 +14,21 @@ public class Cat {
 
   private String name;
   private String description;
+  private Binary image;
   private boolean canBreed;
   private Date lastBred;
   private int rarity;
   private String owner;
-  private String[] parents;
-  private String[] children;
+  private Cat[] parents;
+  private Cat[] children;
   private String dna;
 
+  public Binary getImage() {
+    return image;
+  }
+  public void setImage(Binary image) {
+    this.image = image;
+  }
   public String getName() {
     return name;
   }
@@ -55,16 +65,16 @@ public class Cat {
   public void setOwner(String owner) {
     this.owner = owner;
   }
-  public String[] getParents() {
+  public Cat[] getParents() {
     return parents;
   }
-  public void setParents(String[] parents) {
+  public void setParents(Cat[] parents) {
     this.parents = parents;
   }
-  public String[] getChildren() {
+  public Cat[] getChildren() {
     return children;
   }
-  public void setChildren(String[] children) {
+  public void setChildren(Cat[] children) {
     this.children = children;
   }
   public String getDna() {
@@ -72,5 +82,11 @@ public class Cat {
   }
   public void setDna(String dna) {
     this.dna = dna;
+  }
+
+  public void addChild(Cat cat){
+    ArrayList<Cat> newArr = new ArrayList<Cat>(Arrays.asList(this.children));
+    newArr.add(cat);
+    this.children = newArr.toArray(this.children);
   }
 }
