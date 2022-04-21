@@ -1,5 +1,7 @@
 # CollectiCats
 
+![Logo CollectiCats](https://raw.githubusercontent.com/jeffrey-fontys/s3-portfolio/main/images/CollectiCats_logo_trans.png)
+
 [![Java CI with Maven](https://github.com/jeffrey-fontys/collecticats/actions/workflows/maven.yml/badge.svg)](https://github.com/jeffrey-fontys/collecticats/actions/workflows/maven.yml)
 [![Nightly](https://github.com/jeffrey-fontys/collecticats/actions/workflows/nightly.yml/badge.svg)](https://github.com/jeffrey-fontys/collecticats/actions/workflows/nightly.yml)
 

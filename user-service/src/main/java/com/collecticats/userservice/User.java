@@ -1,24 +1,34 @@
 package com.collecticats.userservice;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 
 public class User {
 
-  @Id private String id;
+  @Id
+  private String id;
 
-  private String username;
-  private String email;
-  
-  public String getUsername() {
-    return username;
+  private String authId;
+  private List<String> cats;
+  private List<User> friends;
+
+  public String getAuthId() {
+    return authId;
   }
-  public String getEmail() {
-    return email;
+  public void setAuthId(String authId) {
+    this.authId = authId;
   }
-  public void setEmail(String email) {
-    this.email = email;
+  public List<String> getCats() {
+    return cats;
   }
-  public void setUsername(String username) {
-    this.username = username;
+  public void setCats(List<String> cats) {
+    this.cats = cats;
+  }
+  public List<User> getFriends() {
+    return friends;
+  }
+  public void setFriends(List<User> friends) {
+    this.friends = friends;
   }
 }
