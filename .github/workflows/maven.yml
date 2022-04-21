@@ -33,8 +33,20 @@ jobs:
         cache: maven
     - name: Build user-service with Maven
       run: mvn -B package --file user-service/pom.xml
+    - name: Upload user-service jar
+      uses: actions/upload-artifact@v3
+      with:
+        name: user-jar
+        path: ./user-service/target/*.jar
+        retention-days: 1
     - name: Build cat-service with Maven
       run: mvn -B package --file cat-service/pom.xml
+    - name: Upload cat-service jar
+      uses: actions/upload-artifact@v3
+      with:
+        name: cat-jar
+        path: ./cat-service/target/*.jar
+        retention-days: 1
 
   publish-user-service:
 
