@@ -18,7 +18,7 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME_USER: jeffreyfontys/collecticats-user-service
   IMAGE_NAME_CAT: jeffreyfontys/collecticats-cat-service
-  IMAGE_NAME_DISCO: jeffreyfontys/collecticats-discovery-service
+  IMAGE_NAME_DISCO: jeffreyfontys/collecticats-discovery-server
 
 jobs:
   build:
@@ -50,12 +50,12 @@ jobs:
         path: ./cat-service/target/*.jar
         retention-days: 1
     - name: Build discovery-service with Maven
-      run: mvn -B package --file discovery-service/pom.xml
-    - name: Upload discovery-service jar
+      run: mvn -B package --file discovery-server/pom.xml
+    - name: Upload discovery-server jar
       uses: actions/upload-artifact@v3
       with:
         name: disco-jar
-        path: ./discovery-service/target/*.jar
+        path: ./discovery-server/target/*.jar
         retention-days: 1
 
   publish-user-service:
@@ -186,6 +186,9 @@ jobs:
       id-token: write
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Download user-jar artifact
         uses: actions/download-artifact@v3
         with:
@@ -223,8 +226,8 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
-          context: ./cat-service
-          file: ./cat-service/Dockerfile
+          context: ./discovery-server
+          file: ./discovery-server/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
