@@ -1,7 +1,7 @@
 package com.collecticats.catservice;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+// import java.util.ArrayList;
+// import java.util.Arrays;
 import java.util.Date;
 
 import org.bson.types.Binary;
@@ -19,8 +19,8 @@ public class Cat {
   private Date lastBred;
   private int rarity;
   private String owner;
-  private Cat[] parents;
-  private Cat[] children;
+  private String[] parents;
+  private String[] children;
   private String dna;
 
   public Binary getImage() {
@@ -65,16 +65,16 @@ public class Cat {
   public void setOwner(String owner) {
     this.owner = owner;
   }
-  public Cat[] getParents() {
+  public String[] getParents() {
     return parents;
   }
-  public void setParents(Cat[] parents) {
+  public void setParents(String[] parents) {
     this.parents = parents;
   }
-  public Cat[] getChildren() {
+  public String[] getChildren() {
     return children;
   }
-  public void setChildren(Cat[] children) {
+  public void setChildren(String[] children) {
     this.children = children;
   }
   public String getDna() {
@@ -84,9 +84,9 @@ public class Cat {
     this.dna = dna;
   }
 
-  public void addChild(Cat cat){
-    ArrayList<Cat> newArr = new ArrayList<Cat>(Arrays.asList(this.children));
-    newArr.add(cat);
-    this.children = newArr.toArray(this.children);
-  }
+  // public void addChild(Cat cat){
+  //   ArrayList<Cat> newArr = new ArrayList<Cat>(Arrays.asList(this.children));
+  //   newArr.add(cat);
+  //   this.children = newArr.toArray(this.children);
+  // }
 }
