@@ -26,3 +26,7 @@ jobs:
       run: mvn -B package --file user-service/pom.xml
     - name: Build cat-service with Maven
       run: mvn -B package --file cat-service/pom.xml
+    - name: Build discovery-server with Maven
+      run: mvn -B package --file discovery-server/pom.xml
+    - name: Build api-gateway with Maven
+      run: mvn -B package --file api-gateway/pom.xml
