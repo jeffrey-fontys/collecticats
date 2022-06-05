@@ -10,9 +10,13 @@ services:
   
   user-service:
     image: jeffreyfontys/collecticats-user-service:main
+    environment:
+      - SPRING_DATA_MONGODB_HOST=mongo-db
 
   cat-service:
     image: jeffreyfontys/collecticats-cat-service:main
+    environment:
+      - SPRING_DATA_MONGODB_HOST=mongo-db
 
   discovery-server:
     image: jeffreyfontys/collecticats-discovery-server:main
