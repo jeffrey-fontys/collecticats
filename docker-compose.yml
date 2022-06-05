@@ -11,12 +11,12 @@ services:
   user-service:
     image: jeffreyfontys/collecticats-user-service:main
     environment:
-      - SPRING_DATA_MONGODB_HOST=mongo-db
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo-db/user
 
   cat-service:
     image: jeffreyfontys/collecticats-cat-service:main
     environment:
-      - SPRING_DATA_MONGODB_HOST=mongo-db
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo-db/cat
 
   discovery-server:
     image: jeffreyfontys/collecticats-discovery-server:main
