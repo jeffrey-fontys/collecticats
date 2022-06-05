@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  api-gateway:
+    image: jeffreyfontys/collecticats-api-gateway:main
+    ports:
+      - 8080:8080
+  
+  user-service:
+    image: jeffreyfontys/collecticats-user-service:main
+
+  cat-service:
+    image: jeffreyfontys/collecticats-cat-service:main
+
+  discovery-server:
+    image: jeffreyfontys/collecticats-discovery-server:main
+    ports:
+      - 8761:8761
