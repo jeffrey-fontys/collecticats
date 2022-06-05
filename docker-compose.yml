@@ -1,5 +1,8 @@
 version: "3.8"
 services:
+  mongo-db:
+    image: mongo
+
   api-gateway:
     image: jeffreyfontys/collecticats-api-gateway:main
     ports:
