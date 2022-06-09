@@ -84,6 +84,12 @@ public class Cat {
   public void setDna(String dna) {
     this.dna = dna;
   }
+  public int getTimesBred() {
+    return timesBred;
+  }
+  public void setTimesBred(int timesBred) {
+    this.timesBred = timesBred;
+  }
 
   // public void addChild(Cat cat){
   //   ArrayList<Cat> newArr = new ArrayList<Cat>(Arrays.asList(this.children));
