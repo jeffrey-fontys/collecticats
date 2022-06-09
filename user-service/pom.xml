@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.collecticats</groupId>
 	<artifactId>user-service</artifactId>
-	<version>0.2.5</version>
+	<version>0.2.6</version>
 	<name>user-service</name>
 	<description>User service for CollectiCats</description>
 	<properties>
