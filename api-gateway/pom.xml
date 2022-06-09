@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.collecticats</groupId>
 	<artifactId>api-gateway</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.2.5</version>
 	<name>api-gateway</name>
 	<description>Gateway for CollectiCats</description>
 	<properties>
