@@ -17,6 +17,7 @@ public class Cat {
   private Binary image;
   private boolean canBreed;
   private Date lastBred;
+  private int timesBred;
   private int rarity;
   private String owner;
   private String[] parents;
