@@ -2,6 +2,8 @@ version: "3.8"
 services:
   mongo-db:
     image: mongo
+    volumes:
+      - db:/data/db
 
   api-gateway:
     image: jeffreyfontys/collecticats-api-gateway:main
@@ -26,3 +28,5 @@ services:
     image: jeffreyfontys/collecticats-discovery-server:main
     ports:
       - 8761:8761
+volumes:
+  db:

@@ -17,6 +17,7 @@ public class Cat {
   private Binary image;
   private boolean canBreed;
   private Date lastBred;
+  private int timesBred;
   private int rarity;
   private String owner;
   private String[] parents;
@@ -82,6 +83,12 @@ public class Cat {
   }
   public void setDna(String dna) {
     this.dna = dna;
+  }
+  public int getTimesBred() {
+    return timesBred;
+  }
+  public void setTimesBred(int timesBred) {
+    this.timesBred = timesBred;
   }
 
   // public void addChild(Cat cat){
