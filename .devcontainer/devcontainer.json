@@ -34,5 +34,8 @@
 	// "postCreateCommand": "java -version",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode"
+	"remoteUser": "vscode",
+	"containerEnv": {
+		"SERVICE_URL_DEFAULT_ZONE": "http://localhost:8761/eureka"
+	}
 }

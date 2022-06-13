@@ -11,3 +11,27 @@ spring:
             - PATCH
             - PUT
             - DELETE
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: cat-service
+        uri: lb://cat-service
+        predicates:
+        - Path=/cat/**
+        filters:
+        - RewritePath=/cat/(?<path>.*), /$\{path}
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+        - Path=/user/**
+        filters:
+        - RewritePath=/user/(?<path>.*), /$\{path}
+      - id: openapi
+        uri: http://localhost:${server.port}
+        predicates:
+        - Path=/v3/api-docs/**
+        filters:
+        - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+springdoc:
+  packagesToScan: [com.collecticats.catservice, com.collecticats.userservice]

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.collecticats</groupId>
 	<artifactId>cat-service</artifactId>
-	<version>0.2.5</version>
+	<version>0.2.6</version>
 	<name>cat-service</name>
 	<description>Cat service for CollectiCats</description>
 	<properties>
@@ -28,6 +28,28 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!-- Springdoc -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.9</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-data-rest</artifactId>
+			<version>1.6.9</version>
+   		</dependency>
+		<!-- end Springdoc -->
+
+		<dependency>
+			<groupId>de.flapdoodle.embed</groupId>
+			<artifactId>de.flapdoodle.embed.mongo</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -39,6 +61,7 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -49,7 +72,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 	<dependencyManagement>
 		<dependencies>

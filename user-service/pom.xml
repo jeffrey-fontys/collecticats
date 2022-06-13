@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.collecticats</groupId>
 	<artifactId>user-service</artifactId>
-	<version>0.2.5</version>
+	<version>0.2.6</version>
 	<name>user-service</name>
 	<description>User service for CollectiCats</description>
 	<properties>
@@ -34,6 +34,18 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- Springdoc -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.9</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-data-rest</artifactId>
+			<version>1.6.9</version>
+   		</dependency>
+		<!-- end Springdoc -->
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
