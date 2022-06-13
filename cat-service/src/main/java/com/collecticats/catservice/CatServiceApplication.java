@@ -6,7 +6,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+
 @SpringBootApplication
+@OpenAPIDefinition(info =
+   @Info(title = "Cat API", version = "1.0", description = "Documentation Cat API v1.0")
+)
 public class CatServiceApplication {
 
 	public static void main(String[] args) {
