@@ -27,7 +27,7 @@ public class ApiGatewayApplication {
 		List<RouteDefinition> definitions = locator.getRouteDefinitions().collectList().block();
 		assert definitions != null;
 		definitions.stream().filter(routeDefinition -> routeDefinition.getId().matches(".*-service")).forEach(routeDefinition -> {
-			String name = routeDefinition.getId().replaceAll("-service", "");
+			String name = routeDefinition.getId().replace("-service", "");
 			GroupedOpenApi.builder().pathsToMatch("/" + name + "/**").group(name).build();
 		});
 		return groups;
