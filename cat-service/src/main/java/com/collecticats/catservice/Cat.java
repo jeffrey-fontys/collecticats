@@ -3,33 +3,36 @@ package com.collecticats.catservice;
 // import java.util.ArrayList;
 // import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
-import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 @Document
 public class Cat {
 
-  @Id
-  private String id;
-
+  @Id private String id;
+  
   private String name;
   private String description;
-  private Binary image;
+  private String image;
   private boolean canBreed;
   private Date lastBred;
   private int timesBred;
   private int rarity;
   private String owner;
-  private String[] parents;
-  private String[] children;
+  @DocumentReference private List<Cat> parents;
+  @DocumentReference private List<Cat> children;
   private String dna;
-
-  public Binary getImage() {
+  
+  public String getId() {
+      return id;
+    }
+  public String getImage() {
     return image;
   }
-  public void setImage(Binary image) {
+  public void setImage(String image) {
     this.image = image;
   }
   public String getName() {
@@ -68,16 +71,16 @@ public class Cat {
   public void setOwner(String owner) {
     this.owner = owner;
   }
-  public String[] getParents() {
+  public List<Cat> getParents() {
     return parents;
   }
-  public void setParents(String[] parents) {
+  public void setParents(List<Cat> parents) {
     this.parents = parents;
   }
-  public String[] getChildren() {
+  public List<Cat> getChildren() {
     return children;
   }
-  public void setChildren(String[] children) {
+  public void setChildren(List<Cat> children) {
     this.children = children;
   }
   public String getDna() {
