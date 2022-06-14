@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.collecticats</groupId>
 	<artifactId>cat-service</artifactId>
-	<version>0.2.6</version>
+	<version>0.3.0</version>
 	<name>cat-service</name>
 	<description>Cat service for CollectiCats</description>
 	<properties>
