@@ -7,6 +7,8 @@
 [![Nightly](https://github.com/jeffrey-fontys/collecticats/actions/workflows/nightly.yml/badge.svg)](https://github.com/jeffrey-fontys/collecticats/actions/workflows/nightly.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=collecticats_api-gateway&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=collecticats_api-gateway)  
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Alpine Linux](https://img.shields.io/badge/Alpine_Linux-%230D597F.svg?style=for-the-badge&logo=alpine-linux&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
@@ -42,7 +44,7 @@ In order to run the CollectiCats back end with this route, please make sure that
 
 #### Setting port numbers
 
-In order for the software to run correctly on your system, you must specify which ports the application is allowed use. The back end contains two services that require an available port on your system to function: the API-gateway and the Eureka discovery server. Included in the project root directory is a `.env.example` file. To set the ports, remove the `.example` part of the filename on your system and enter your desired port numbers into the file, as shown in the example below. Remember to save the file when you are done.
+In order for the software to run correctly on your system, it might be necessary to specify which ports the application is allowed use. The back end contains two services that require an available port on your system to function: the API-gateway and the Eureka discovery server. Included in the project root directory is a `.env.example` file. To set the ports, remove the `.example` part of the filename on your system and enter your desired port numbers into the file, as shown in the example with the default values below. Remember to save the file when you are done.
 
 ```
 GATEWAY_PORT=8080
@@ -81,10 +83,10 @@ docker-compose down
 
 ## API Documentation
 
-The CollectiCats back end functions solely as an API server and serves only this functionality and its corresponding documentation. The API endpoints and documentation can be reached through the port specified for the API-gateway in your [environment file](#setting-port-numbers). The documentation is served with [Swagger UI](https://swagger.io/tools/swagger-ui/) and can be accessed at the following address:
+The CollectiCats back end functions solely as an API server and serves only this functionality and its corresponding documentation. The API endpoints and documentation can be reached through the default port 8080 or the port specified for the API-gateway in your [environment file](#setting-port-numbers). The documentation is served with [Swagger UI](https://swagger.io/tools/swagger-ui/) and can be accessed at the following address:
 
 ```
-http://{host}:{port}/swagger-ui.html
+http://{host}:{gateway_port}/swagger-ui.html
 ```
 
 All API endpoints can be accessed through [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) requests as detailed in the documentation. Responses are formatted in JSON+[HAL](https://en.wikipedia.org/wiki/Hypertext_Application_Language).

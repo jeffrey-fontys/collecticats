@@ -10,7 +10,7 @@ services:
   api-gateway:
     image: jeffreyfontys/collecticats-api-gateway:main
     ports:
-      - ${GATEWAY_PORT}:8080
+      - ${GATEWAY_PORT:-8080}:8080
     environment:
       - SERVICE_URL_DEFAULT_ZONE=http://discovery-server:8761/eureka
   
@@ -29,7 +29,7 @@ services:
   discovery-server:
     image: jeffreyfontys/collecticats-discovery-server:main
     ports:
-      - ${EUREKA_PORT}:8761
+      - ${EUREKA_PORT:-8761}:8761
 
 volumes:
   db:
