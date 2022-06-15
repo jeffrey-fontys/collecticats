@@ -239,7 +239,7 @@
 									"pm.test(\"Retrieved object contains the right data\", function () {\r",
 									"    let properties = [\"authId\"]\r",
 									"    let response = pm.response.json();\r",
-									"    let expected = pm.collectionVariables.get(\"UserBody\");\r",
+									"    let expected = pm.collectionVariables.get(\"userBody\");\r",
 									"    \r",
 									"    properties.forEach((property) => {\r",
 									"        pm.expect(response.property).to.eql(expected.property);\r",
