@@ -1,7 +1,5 @@
 package com.collecticats.catservice;
 
-// import java.util.ArrayList;
-// import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -95,10 +93,4 @@ public class Cat {
   public void setTimesBred(int timesBred) {
     this.timesBred = timesBred;
   }
-
-  // public void addChild(Cat cat){
-  //   ArrayList<Cat> newArr = new ArrayList<Cat>(Arrays.asList(this.children));
-  //   newArr.add(cat);
-  //   this.children = newArr.toArray(this.children);
-  // }
 }
