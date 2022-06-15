@@ -135,12 +135,16 @@ jobs:
     - name: Install Newman dependency
       run: npm install --prefix tests/postman/
     
+    - name: Extract tag
+      id: extract-tag
+      run: echo "::set-output name=tag::$(echo "$GITHUB_REF" | awk -F/ '{print $3}')"
+    
     - name: Docker Compose Action
       uses: isbang/compose-action@v1.1.0
       with:
         compose-file: "./tests/postman/docker-compose.yml"
       env:
-        PR_TAG: pr-${{ echo $github.ref | awk -F/ '{print $3}' }}
+        PR_TAG: ${{ steps.extract-tag.output.tag }}
 
     - name: Run Postman tests
       run: |
