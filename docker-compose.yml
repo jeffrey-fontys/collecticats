@@ -4,8 +4,6 @@ services:
 
   mongo-db:
     image: mongo
-    volumes:
-      - db:/data/db
 
   api-gateway:
     image: jeffreyfontys/collecticats-api-gateway:latest
