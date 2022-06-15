@@ -144,7 +144,7 @@ jobs:
 
     - name: Run the API and Postman's tests
       run: |
-        sleep 10
+        sleep 90
         cd tests/postman/
         node ./node_modules/newman/bin/newman.js run test_cat.json -e env.json
         node ./node_modules/newman/bin/newman.js run test_user.json -e env.json
