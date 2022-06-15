@@ -140,9 +140,9 @@ jobs:
       with:
         compose-file: "./tests/postman/docker-compose.yml"
       env:
-        PR_TAG: pr-9
+        PR_TAG: pr-${{ echo $github.ref | awk -F/ '{print $3}' }}
 
-    - name: Run the API and Postman's tests
+    - name: Run Postman tests
       run: |
         sleep 90
         cd tests/postman/
