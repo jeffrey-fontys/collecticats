@@ -238,7 +238,7 @@
 									"\r",
 									"pm.test(\"Retrieved object contains the right data\", function () {\r",
 									"    let properties = [\"authId\"]\r",
-									"    let response = pm.response.json()._embedded.users[0];\r",
+									"    let response = pm.response.json();\r",
 									"    let expected = pm.collectionVariables.get(\"UserBody\");\r",
 									"    \r",
 									"    properties.forEach((property) => {\r",
