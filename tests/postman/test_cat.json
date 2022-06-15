@@ -1,0 +1,1146 @@
+{
+	"info": {
+		"_postman_id": "e04299da-2f29-48ab-af12-9b82550dc8b0",
+		"name": "Cat API",
+		"description": "Documentation Cat API v1.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19557167"
+	},
+	"item": [
+		{
+			"name": "cats",
+			"item": [
+				{
+					"name": "post Collection Resource-cat-post",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code === 201) {\r",
+									"    let requestBody = JSON.parse(pm.request.body.raw);\r",
+									"    pm.collectionVariables.set(\"catBody\", requestBody);\r",
+									"};"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/hal+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"fugiat\",\n  \"description\": \"culpa irure aute eiusmod\",\n  \"image\": \"consequat\",\n  \"canBreed\": true,\n  \"lastBred\": \"1982-02-27T03:47:37.868Z\",\n  \"timesBred\": -71034654,\n  \"rarity\": 87304626,\n  \"owner\": \"fugiat Lo\",\n  \"parents\": [],\n  \"children\": [],\n  \"dna\": \"quis qui dolore eu\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{prefix}}/cats",
+							"host": [
+								"{{baseUrl}}{{prefix}}"
+							],
+							"path": [
+								"cats"
+							]
+						},
+						"description": "create-cat"
+					},
+					"response": [
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"tempor\",\n  \"name\": \"labore consectetur\",\n  \"description\": \"voluptate quis\",\n  \"image\": \"laborum incididunt\",\n  \"canBreed\": true,\n  \"lastBred\": \"1981-02-07T02:56:36.125Z\",\n  \"timesBred\": 25337040,\n  \"rarity\": 10701366,\n  \"owner\": \"exercitation dolor\",\n  \"parents\": [\n    \"enim aliqua\",\n    \"magna esse consectetur\"\n  ],\n  \"children\": [\n    \"e\",\n    \"irure sunt min\"\n  ],\n  \"dna\": \"nulla non\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cats",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cats"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"name\": \"velit nisi culpa dolor\",\n  \"description\": \"aute fugiat laborum pariatur\",\n  \"image\": \"eu aliquip\",\n  \"canBreed\": true,\n  \"lastBred\": \"1970-09-01T23:41:12.440Z\",\n  \"timesBred\": 29149665,\n  \"rarity\": -91337807,\n  \"owner\": \"ex anim non elit\",\n  \"dna\": \"\",\n  \"_links\": {\n    \"ipsum6f0\": {\n      \"href\": \"do nostrud nulla\",\n      \"hreflang\": \"dolore est esse id sint\",\n      \"title\": \"consectetur dolore officia elit\",\n      \"type\": \"cupidatat est aliquip velit dolor\",\n      \"deprecation\": \"ut Lorem ad in\",\n      \"profile\": \"labor\",\n      \"name\": \"ad magna et sed\",\n      \"templated\": true\n    }\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "get Collection Resource-cat-get 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Retrieved object contains the right data\", function () {\r",
+									"    let properties = [\"name\", \"description\", \"canBreed\", \"owner\", \"dna\"]\r",
+									"    let response = pm.response.json()._embedded.cats[0];\r",
+									"    let expected = pm.collectionVariables.get(\"catBody\");\r",
+									"    \r",
+									"    properties.forEach((property) => {\r",
+									"        pm.expect(response.property).to.eql(expected.property);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code === 200) {\r",
+									"    let catIndex = pm.response.json()._embedded.cats.length - 1;\r",
+									"    let response = pm.response.json()._embedded.cats[catIndex]._links.self.href;\r",
+									"    pm.collectionVariables.set(\"hrefCat\", response);\r",
+									"};"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/hal+json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}{{prefix}}/cats",
+							"host": [
+								"{{baseUrl}}{{prefix}}"
+							],
+							"path": [
+								"cats"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "Zero-based page index (0..N)",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "20",
+									"description": "The size of the page to be returned",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "aute n",
+									"description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "non ut nostru",
+									"description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "get-cat"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/cats?page=0&size=20&sort=sunt est ex&sort=exercitation Excepteur aliqua",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cats"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "20"
+										},
+										{
+											"key": "sort",
+											"value": "sunt est ex"
+										},
+										{
+											"key": "sort",
+											"value": "exercitation Excepteur aliqua"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"_embedded\": {\n    \"cats\": [\n      {\n        \"name\": \"aliqua tempor ad\",\n        \"description\": \"aliquip adipisicing\",\n        \"image\": \"cupidatat ad mollit commodo aute\",\n        \"canBreed\": true,\n        \"lastBred\": \"2021-02-12T09:28:35.550Z\",\n        \"timesBred\": 70848696,\n        \"rarity\": -92009323,\n        \"owner\": \"anim dolor dolore ipsum\",\n        \"dna\": \"ullamco ut\",\n        \"_links\": {\n          \"culpa_a_1\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hreflang\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deprecation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"templated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"ad_1\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hreflang\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deprecation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"templated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"in0\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hreflang\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deprecation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"templated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"reprehenderitf\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hreflang\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deprecation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"templated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      {\n        \"name\": \"enim sunt consequat\",\n        \"description\": \"Duis occaecat amet\",\n        \"image\": \"aliqua exercitation in fugiat\",\n        \"canBreed\": false,\n        \"lastBred\": \"2017-04-17T17:56:11.152Z\",\n        \"timesBred\": 44571765,\n        \"rarity\": 78097580,\n        \"owner\": \"aliqua consequat esse voluptate\",\n        \"dna\": \"laboris s\",\n        \"_links\": {\n          \"esse47\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hreflang\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deprecation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"templated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"nulla622\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hreflang\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deprecation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"templated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      }\n    ]\n  },\n  \"_links\": {\n    \"laborumfe\": {\n      \"href\": \"magna consectetur\",\n      \"hreflang\": \"occaecat ea commodo\",\n      \"title\": \"eiusmod Excepteur minim velit\",\n      \"type\": \"laborum amet ullamco irure\",\n      \"deprecation\": \"eu cillum\",\n      \"profile\": \"et ullamco incididunt cupidatat\",\n      \"name\": \"dolore aliquip mollit occaecat\",\n      \"templated\": false\n    }\n  },\n  \"page\": {\n    \"size\": 5159409,\n    \"totalElements\": 1802897,\n    \"totalPages\": 27963502,\n    \"number\": -98964484\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "execute Search-cat-get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Retrieved object contains the right data\", function () {\r",
+									"    let properties = [\"name\", \"description\", \"canBreed\", \"owner\", \"dna\"]\r",
+									"    let response = pm.response.json()._embedded.cats[0];\r",
+									"    let expected = pm.collectionVariables.get(\"catBody\");\r",
+									"    \r",
+									"    properties.forEach((property) => {\r",
+									"        pm.expect(response.property).to.eql(expected.property);\r",
+									"    });\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/hal+json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}{{prefix}}/cats/search/findByOwner?owner=fugiat Lo",
+							"host": [
+								"{{baseUrl}}{{prefix}}"
+							],
+							"path": [
+								"cats",
+								"search",
+								"findByOwner"
+							],
+							"query": [
+								{
+									"key": "owner",
+									"value": "fugiat Lo"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/cats/search/findByOwner?owner=fugiat mollit",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cats",
+										"search",
+										"findByOwner"
+									],
+									"query": [
+										{
+											"key": "owner",
+											"value": "fugiat mollit"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"_embedded\": {\n    \"cats\": [\n      {\n        \"name\": \"aute nostrud\",\n        \"description\": \"sed veniam qui\",\n        \"image\": \"non magna\",\n        \"canBreed\": false,\n        \"lastBred\": \"1999-01-20T15:07:55.881Z\",\n        \"timesBred\": -18446266,\n        \"rarity\": -65410799,\n        \"owner\": \"pariatur ipsum tempor magna cupidatat\",\n        \"dna\": \"velit \",\n        \"_links\": {\n          \"laboris__1\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hreflang\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deprecation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"templated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"id_545\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hreflang\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deprecation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"templated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      {\n        \"name\": \"commodo exercitation\",\n        \"description\": \"id consequat\",\n        \"image\": \"velit officia sunt ad culpa\",\n        \"canBreed\": false,\n        \"lastBred\": \"1953-07-26T04:36:33.765Z\",\n        \"timesBred\": 71995417,\n        \"rarity\": -99545149,\n        \"owner\": \"consequat do\",\n        \"dna\": \"aliquip amet qui eu\",\n        \"_links\": {\n          \"deserunt_3_\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hreflang\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deprecation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"templated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      }\n    ]\n  },\n  \"_links\": {\n    \"esse_807\": {\n      \"href\": \"incididunt ut est ullamco rep\",\n      \"hreflang\": \"qui culpa\",\n      \"title\": \"sit\",\n      \"type\": \"officia Ut mollit eu\",\n      \"deprecation\": \"reprehenderit ullamco sunt\",\n      \"profile\": \"Duis irure magna tempor Excepteur\",\n      \"name\": \"ex ullamco non co\",\n      \"templated\": false\n    }\n  }\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/cats/search/findByOwner?owner=fugiat mollit",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cats",
+										"search",
+										"findByOwner"
+									],
+									"query": [
+										{
+											"key": "owner",
+											"value": "fugiat mollit"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "{id}",
+			"item": [
+				{
+					"name": "children",
+					"item": [
+						{
+							"name": "follow Property Reference-cat-get 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{hrefCat}}/children",
+									"host": [
+										"{{hrefCat}}"
+									],
+									"path": [
+										"children"
+									]
+								},
+								"description": "get-cat-by-cat-Id"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cats/:id/children",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cats",
+												":id",
+												"children"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "fugiat mollit",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/hal+json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"_embedded\": {\n    \"cats\": [\n      {\n        \"name\": \"ea\",\n        \"description\": \"eu amet\",\n        \"image\": \"occaecat in\",\n        \"canBreed\": true,\n        \"lastBred\": \"2016-04-14T01:50:01.417Z\",\n        \"timesBred\": 58544537,\n        \"rarity\": -18360853,\n        \"owner\": \"aliq\",\n        \"dna\": \"Ut exercitation dolore\"\n      },\n      {\n        \"name\": \"velit Ut elit\",\n        \"description\": \"irure elit Lorem aliquip\",\n        \"image\": \"ut eiusmod\",\n        \"canBreed\": false,\n        \"lastBred\": \"1966-06-15T09:25:23.215Z\",\n        \"timesBred\": 10953313,\n        \"rarity\": 57500603,\n        \"owner\": \"ullamco sed sit\",\n        \"dna\": \"Lorem in\"\n      }\n    ]\n  },\n  \"_links\": {\n    \"ut72_\": {\n      \"href\": \"labore anim laboris occaecat\",\n      \"hreflang\": \"do \",\n      \"title\": \"irure consequat eiusmod\",\n      \"type\": \"labore qui ea\",\n      \"deprecation\": \"fugia\",\n      \"profile\": \"anim\",\n      \"name\": \"deserunt dolor non\",\n      \"templated\": false\n    },\n    \"consequat_235\": {\n      \"href\": \"occae\",\n      \"hreflang\": \"ullamco fugiat\",\n      \"title\": \"culpa commodo anim ut tempor\",\n      \"type\": \"occaecat ex elit\",\n      \"deprecation\": \"ex do dolor\",\n      \"profile\": \"dolor\",\n      \"name\": \"Excepteur ad in\",\n      \"templated\": true\n    }\n  }\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cats/:id/children",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cats",
+												":id",
+												"children"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "fugiat mollit",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "parents",
+					"item": [
+						{
+							"name": "follow Property Reference-cat-get 2 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{hrefCat}}/parents",
+									"host": [
+										"{{hrefCat}}"
+									],
+									"path": [
+										"parents"
+									]
+								},
+								"description": "get-cat-by-cat-Id"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cats/:id/parents",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cats",
+												":id",
+												"parents"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "fugiat mollit",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/hal+json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"_embedded\": {\n    \"cats\": [\n      {\n        \"name\": \"ut incididunt\",\n        \"description\": \"occaecat iru\",\n        \"image\": \"mollit sunt ad sit\",\n        \"canBreed\": true,\n        \"lastBred\": \"2016-08-16T16:17:50.768Z\",\n        \"timesBred\": 71098666,\n        \"rarity\": 61393687,\n        \"owner\": \"adipisicing sunt ad dolor proident\",\n        \"dna\": \"in amet et voluptate aliqua\"\n      },\n      {\n        \"name\": \"Excepteur\",\n        \"description\": \"dolore dolore labore Duis\",\n        \"image\": \"in pariatur ex\",\n        \"canBreed\": false,\n        \"lastBred\": \"1996-01-29T18:20:20.093Z\",\n        \"timesBred\": -81621704,\n        \"rarity\": -64133849,\n        \"owner\": \"amet mollit tempor\",\n        \"dna\": \"elit sint ad\"\n      }\n    ]\n  },\n  \"_links\": {\n    \"in_40\": {\n      \"href\": \"labore\",\n      \"hreflang\": \"cupidatat velit\",\n      \"title\": \"nulla\",\n      \"type\": \"non nulla\",\n      \"deprecation\": \"in \",\n      \"profile\": \"ad ipsum ut\",\n      \"name\": \"fugiat Duis\",\n      \"templated\": false\n    },\n    \"veniamd\": {\n      \"href\": \"qui\",\n      \"hreflang\": \"ex anim\",\n      \"title\": \"dolore ut com\",\n      \"type\": \"consequat tempor dolor ut officia\",\n      \"deprecation\": \"est nisi occaecat dolor Ut\",\n      \"profile\": \"est consequat magna non incididunt\",\n      \"name\": \"Lorem\",\n      \"templated\": true\n    },\n    \"in_58\": {\n      \"href\": \"irure\",\n      \"hreflang\": \"eni\",\n      \"title\": \"reprehenderit\",\n      \"type\": \"Ut ea adipisicing\",\n      \"deprecation\": \"sed adipisicing qui aliquip pariatur\",\n      \"profile\": \"proident sit adipisicing officia\",\n      \"name\": \"sunt in dolore ullamco dolor\",\n      \"templated\": true\n    }\n  }\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cats/:id/parents",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cats",
+												":id",
+												"parents"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "fugiat mollit",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "get Item Resource-cat-get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/hal+json"
+							}
+						],
+						"url": {
+							"raw": "{{hrefCat}}",
+							"host": [
+								"{{hrefCat}}"
+							]
+						},
+						"description": "get-cat"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/cats/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cats",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "fugiat mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"name\": \"velit nisi culpa dolor\",\n  \"description\": \"aute fugiat laborum pariatur\",\n  \"image\": \"eu aliquip\",\n  \"canBreed\": true,\n  \"lastBred\": \"1970-09-01T23:41:12.440Z\",\n  \"timesBred\": 29149665,\n  \"rarity\": -91337807,\n  \"owner\": \"ex anim non elit\",\n  \"dna\": \"\",\n  \"_links\": {\n    \"ipsum6f0\": {\n      \"href\": \"do nostrud nulla\",\n      \"hreflang\": \"dolore est esse id sint\",\n      \"title\": \"consectetur dolore officia elit\",\n      \"type\": \"cupidatat est aliquip velit dolor\",\n      \"deprecation\": \"ut Lorem ad in\",\n      \"profile\": \"labor\",\n      \"name\": \"ad magna et sed\",\n      \"templated\": true\n    }\n  }\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/cats/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cats",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "fugiat mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "put Item Resource-cat-put",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/hal+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"labore consectetur\",\n  \"description\": \"voluptate quis\",\n  \"image\": \"laborum incididunt\",\n  \"canBreed\": true,\n  \"lastBred\": \"1981-02-07T02:56:36.125Z\",\n  \"timesBred\": 25337040,\n  \"rarity\": 10701366,\n  \"owner\": \"exercitation dolor\",\n  \"parents\": [],\n  \"children\": [],\n  \"dna\": \"nulla non\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hrefCat}}",
+							"host": [
+								"{{hrefCat}}"
+							]
+						},
+						"description": "update-cat"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"tempor\",\n  \"name\": \"labore consectetur\",\n  \"description\": \"voluptate quis\",\n  \"image\": \"laborum incididunt\",\n  \"canBreed\": true,\n  \"lastBred\": \"1981-02-07T02:56:36.125Z\",\n  \"timesBred\": 25337040,\n  \"rarity\": 10701366,\n  \"owner\": \"exercitation dolor\",\n  \"parents\": [\n    \"enim aliqua\",\n    \"magna esse consectetur\"\n  ],\n  \"children\": [\n    \"e\",\n    \"irure sunt min\"\n  ],\n  \"dna\": \"nulla non\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cats/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cats",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "fugiat mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"name\": \"velit nisi culpa dolor\",\n  \"description\": \"aute fugiat laborum pariatur\",\n  \"image\": \"eu aliquip\",\n  \"canBreed\": true,\n  \"lastBred\": \"1970-09-01T23:41:12.440Z\",\n  \"timesBred\": 29149665,\n  \"rarity\": -91337807,\n  \"owner\": \"ex anim non elit\",\n  \"dna\": \"\",\n  \"_links\": {\n    \"ipsum6f0\": {\n      \"href\": \"do nostrud nulla\",\n      \"hreflang\": \"dolore est esse id sint\",\n      \"title\": \"consectetur dolore officia elit\",\n      \"type\": \"cupidatat est aliquip velit dolor\",\n      \"deprecation\": \"ut Lorem ad in\",\n      \"profile\": \"labor\",\n      \"name\": \"ad magna et sed\",\n      \"templated\": true\n    }\n  }\n}"
+						},
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"tempor\",\n  \"name\": \"labore consectetur\",\n  \"description\": \"voluptate quis\",\n  \"image\": \"laborum incididunt\",\n  \"canBreed\": true,\n  \"lastBred\": \"1981-02-07T02:56:36.125Z\",\n  \"timesBred\": 25337040,\n  \"rarity\": 10701366,\n  \"owner\": \"exercitation dolor\",\n  \"parents\": [\n    \"enim aliqua\",\n    \"magna esse consectetur\"\n  ],\n  \"children\": [\n    \"e\",\n    \"irure sunt min\"\n  ],\n  \"dna\": \"nulla non\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cats/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cats",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "fugiat mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"name\": \"velit nisi culpa dolor\",\n  \"description\": \"aute fugiat laborum pariatur\",\n  \"image\": \"eu aliquip\",\n  \"canBreed\": true,\n  \"lastBred\": \"1970-09-01T23:41:12.440Z\",\n  \"timesBred\": 29149665,\n  \"rarity\": -91337807,\n  \"owner\": \"ex anim non elit\",\n  \"dna\": \"\",\n  \"_links\": {\n    \"ipsum6f0\": {\n      \"href\": \"do nostrud nulla\",\n      \"hreflang\": \"dolore est esse id sint\",\n      \"title\": \"consectetur dolore officia elit\",\n      \"type\": \"cupidatat est aliquip velit dolor\",\n      \"deprecation\": \"ut Lorem ad in\",\n      \"profile\": \"labor\",\n      \"name\": \"ad magna et sed\",\n      \"templated\": true\n    }\n  }\n}"
+						},
+						{
+							"name": "No Content",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"tempor\",\n  \"name\": \"labore consectetur\",\n  \"description\": \"voluptate quis\",\n  \"image\": \"laborum incididunt\",\n  \"canBreed\": true,\n  \"lastBred\": \"1981-02-07T02:56:36.125Z\",\n  \"timesBred\": 25337040,\n  \"rarity\": 10701366,\n  \"owner\": \"exercitation dolor\",\n  \"parents\": [\n    \"enim aliqua\",\n    \"magna esse consectetur\"\n  ],\n  \"children\": [\n    \"e\",\n    \"irure sunt min\"\n  ],\n  \"dna\": \"nulla non\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cats/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cats",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "fugiat mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "patch Item Resource-cat-patch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/hal+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"dna\": \"nulla non\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hrefCat}}",
+							"host": [
+								"{{hrefCat}}"
+							]
+						},
+						"description": "patch-cat"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"tempor\",\n  \"name\": \"labore consectetur\",\n  \"description\": \"voluptate quis\",\n  \"image\": \"laborum incididunt\",\n  \"canBreed\": true,\n  \"lastBred\": \"1981-02-07T02:56:36.125Z\",\n  \"timesBred\": 25337040,\n  \"rarity\": 10701366,\n  \"owner\": \"exercitation dolor\",\n  \"parents\": [\n    \"enim aliqua\",\n    \"magna esse consectetur\"\n  ],\n  \"children\": [\n    \"e\",\n    \"irure sunt min\"\n  ],\n  \"dna\": \"nulla non\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cats/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cats",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "fugiat mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"name\": \"velit nisi culpa dolor\",\n  \"description\": \"aute fugiat laborum pariatur\",\n  \"image\": \"eu aliquip\",\n  \"canBreed\": true,\n  \"lastBred\": \"1970-09-01T23:41:12.440Z\",\n  \"timesBred\": 29149665,\n  \"rarity\": -91337807,\n  \"owner\": \"ex anim non elit\",\n  \"dna\": \"\",\n  \"_links\": {\n    \"ipsum6f0\": {\n      \"href\": \"do nostrud nulla\",\n      \"hreflang\": \"dolore est esse id sint\",\n      \"title\": \"consectetur dolore officia elit\",\n      \"type\": \"cupidatat est aliquip velit dolor\",\n      \"deprecation\": \"ut Lorem ad in\",\n      \"profile\": \"labor\",\n      \"name\": \"ad magna et sed\",\n      \"templated\": true\n    }\n  }\n}"
+						},
+						{
+							"name": "No Content",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"tempor\",\n  \"name\": \"labore consectetur\",\n  \"description\": \"voluptate quis\",\n  \"image\": \"laborum incididunt\",\n  \"canBreed\": true,\n  \"lastBred\": \"1981-02-07T02:56:36.125Z\",\n  \"timesBred\": 25337040,\n  \"rarity\": 10701366,\n  \"owner\": \"exercitation dolor\",\n  \"parents\": [\n    \"enim aliqua\",\n    \"magna esse consectetur\"\n  ],\n  \"children\": [\n    \"e\",\n    \"irure sunt min\"\n  ],\n  \"dna\": \"nulla non\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cats/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cats",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "fugiat mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "delete Item Resource-cat-delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{hrefCat}}",
+							"host": [
+								"{{hrefCat}}"
+							]
+						},
+						"description": "delete-cat"
+					},
+					"response": [
+						{
+							"name": "No Content",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/cats/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cats",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "fugiat mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/cats/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cats",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "fugiat mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "prefix",
+			"value": "/cat-service",
+			"type": "string"
+		},
+		{
+			"key": "hrefCat",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

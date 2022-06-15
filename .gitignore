@@ -33,3 +33,6 @@ hs_err_pid*
 
 ### Environment file
 .env
+
+### Node modules
+node_modules

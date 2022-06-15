@@ -1,0 +1,909 @@
+{
+	"info": {
+		"_postman_id": "f60570e6-8aa5-4a86-b974-a93cf5009018",
+		"name": "User API",
+		"description": "Documentation User API v1.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19557167"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "post Collection Resource-user-post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code === 201) {\r",
+									"    let requestBody = JSON.parse(pm.request.body.raw);\r",
+									"    pm.collectionVariables.set(\"userBody\", requestBody);\r",
+									"};"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/hal+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"authId\": \"hvhjgdvjkhbjke\",\n  \"cats\": [],\n  \"friends\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{prefix}}/users",
+							"host": [
+								"{{baseUrl}}{{prefix}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "create-user"
+					},
+					"response": [
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"authId\": \"sint consectetur commodo\",\n  \"cats\": [\n    \"consequat amet cupidatat laborum eu\",\n    \"cillum labore quis\"\n  ],\n  \"friends\": [\n    {\n      \"authId\": \"officia proident\",\n      \"cats\": [\n        \"nulla id\",\n        \"labore eiusmod occaecat\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    },\n    {\n      \"authId\": \"laboris velit in off\",\n      \"cats\": [\n        \"ea in\",\n        \"reprehenderit nulla ad\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"authId\": \"nulla cillum cupidatat\",\n  \"cats\": [\n    \"incididunt \",\n    \"non ad ullamco sit\"\n  ],\n  \"friends\": [\n    {\n      \"authId\": \"cillum ut deserunt dolor\",\n      \"cats\": [\n        \"labore enim\",\n        \"minim nulla veniam\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    },\n    {\n      \"authId\": \"in adipisicing amet\",\n      \"cats\": [\n        \"minim aute consequat la\",\n        \"in\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    }\n  ],\n  \"_links\": {\n    \"consectetur_7f0\": {\n      \"href\": \"magna fugiat\",\n      \"hreflang\": \"consequat\",\n      \"title\": \"magna\",\n      \"type\": \"minim nisi\",\n      \"deprecation\": \"quis adipisicing do\",\n      \"profile\": \"nostrud\",\n      \"name\": \"quis ex culpa\",\n      \"templated\": false\n    }\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "get Collection Resource-user-get 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Retrieved object contains the right data\", function () {\r",
+									"    let properties = [\"authId\"]\r",
+									"    let response = pm.response.json()._embedded.users[0];\r",
+									"    let expected = pm.collectionVariables.get(\"userBody\");\r",
+									"    \r",
+									"    properties.forEach((property) => {\r",
+									"        pm.expect(response.property).to.eql(expected.property);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code === 200) {\r",
+									"    let userIndex = pm.response.json()._embedded.users.length - 1;\r",
+									"    let response = pm.response.json()._embedded.users[userIndex]._links.self.href;\r",
+									"    pm.collectionVariables.set(\"hrefUser\", response);\r",
+									"};"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/hal+json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}{{prefix}}/users",
+							"host": [
+								"{{baseUrl}}{{prefix}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "Zero-based page index (0..N)",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "20",
+									"description": "The size of the page to be returned",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "minim Ut",
+									"description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "esse in dolor consequat",
+									"description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "get-user"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users?page=0&size=20&sort=pariatur&sort=cillum proident",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "20"
+										},
+										{
+											"key": "sort",
+											"value": "pariatur"
+										},
+										{
+											"key": "sort",
+											"value": "cillum proident"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"_embedded\": {\n    \"users\": [\n      {\n        \"authId\": \"proident eu ullamco\",\n        \"cats\": [\n          \"culpa esse proident\",\n          \"minim velit in\"\n        ],\n        \"friends\": [\n          {\n            \"authId\": \"id\",\n            \"cats\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"friends\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"authId\": \"Duis Excepteur et occaecat\",\n            \"cats\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"friends\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"_links\": {\n          \"laborum3\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hreflang\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deprecation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"templated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"ex1ce\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hreflang\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deprecation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"templated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      {\n        \"authId\": \"consequat cillum dolor labore pariatur\",\n        \"cats\": [\n          \"do consequat ipsum in\",\n          \"do\"\n        ],\n        \"friends\": [\n          {\n            \"authId\": \"fugiat nostrud in in nisi\",\n            \"cats\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"friends\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"authId\": \"Lorem elit nostrud nisi\",\n            \"cats\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"friends\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"_links\": {\n          \"voluptate_d4\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hreflang\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deprecation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"templated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"doloreefd\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hreflang\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deprecation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"templated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"culpa__e\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hreflang\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deprecation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"templated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      }\n    ]\n  },\n  \"_links\": {\n    \"ida\": {\n      \"href\": \"officia dolor sunt sit\",\n      \"hreflang\": \"incididunt laborum exercitation nostrud enim\",\n      \"title\": \"Excepteur laborum dolor adipisicing\",\n      \"type\": \"eiusmod irure\",\n      \"deprecation\": \"et qui\",\n      \"profile\": \"officia commo\",\n      \"name\": \"ex velit nulla aute\",\n      \"templated\": true\n    },\n    \"irure_1\": {\n      \"href\": \"ipsum dolore anim\",\n      \"hreflang\": \"deserunt enim\",\n      \"title\": \"\",\n      \"type\": \"consequa\",\n      \"deprecation\": \"voluptate culpa fugiat ut sed\",\n      \"profile\": \"ullamco adipisicing\",\n      \"name\": \"Duis sint in\",\n      \"templated\": false\n    }\n  },\n  \"page\": {\n    \"size\": 39712062,\n    \"totalElements\": -85928683,\n    \"totalPages\": -46448558,\n    \"number\": -73953585\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "execute Search-user-get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Retrieved object contains the right data\", function () {\r",
+									"    let properties = [\"authId\"]\r",
+									"    let response = pm.response.json()._embedded.users[0];\r",
+									"    let expected = pm.collectionVariables.get(\"UserBody\");\r",
+									"    \r",
+									"    properties.forEach((property) => {\r",
+									"        pm.expect(response.property).to.eql(expected.property);\r",
+									"    });\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/hal+json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}{{prefix}}/users/search/findByAuthId?authId=hvhjgdvjkhbjke",
+							"host": [
+								"{{baseUrl}}{{prefix}}"
+							],
+							"path": [
+								"users",
+								"search",
+								"findByAuthId"
+							],
+							"query": [
+								{
+									"key": "authId",
+									"value": "hvhjgdvjkhbjke"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/search/findByAuthId?authId=dolor esse id cillum",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"search",
+										"findByAuthId"
+									],
+									"query": [
+										{
+											"key": "authId",
+											"value": "dolor esse id cillum"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"authId\": \"nulla cillum cupidatat\",\n  \"cats\": [\n    \"incididunt \",\n    \"non ad ullamco sit\"\n  ],\n  \"friends\": [\n    {\n      \"authId\": \"cillum ut deserunt dolor\",\n      \"cats\": [\n        \"labore enim\",\n        \"minim nulla veniam\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    },\n    {\n      \"authId\": \"in adipisicing amet\",\n      \"cats\": [\n        \"minim aute consequat la\",\n        \"in\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    }\n  ],\n  \"_links\": {\n    \"consectetur_7f0\": {\n      \"href\": \"magna fugiat\",\n      \"hreflang\": \"consequat\",\n      \"title\": \"magna\",\n      \"type\": \"minim nisi\",\n      \"deprecation\": \"quis adipisicing do\",\n      \"profile\": \"nostrud\",\n      \"name\": \"quis ex culpa\",\n      \"templated\": false\n    }\n  }\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/search/findByAuthId?authId=dolor esse id cillum",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"search",
+										"findByAuthId"
+									],
+									"query": [
+										{
+											"key": "authId",
+											"value": "dolor esse id cillum"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "{id}",
+			"item": [
+				{
+					"name": "get Item Resource-user-get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/hal+json"
+							}
+						],
+						"url": {
+							"raw": "{{hrefUser}}",
+							"host": [
+								"{{hrefUser}}"
+							]
+						},
+						"description": "get-user"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "dolor esse id cillum",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"authId\": \"nulla cillum cupidatat\",\n  \"cats\": [\n    \"incididunt \",\n    \"non ad ullamco sit\"\n  ],\n  \"friends\": [\n    {\n      \"authId\": \"cillum ut deserunt dolor\",\n      \"cats\": [\n        \"labore enim\",\n        \"minim nulla veniam\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    },\n    {\n      \"authId\": \"in adipisicing amet\",\n      \"cats\": [\n        \"minim aute consequat la\",\n        \"in\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    }\n  ],\n  \"_links\": {\n    \"consectetur_7f0\": {\n      \"href\": \"magna fugiat\",\n      \"hreflang\": \"consequat\",\n      \"title\": \"magna\",\n      \"type\": \"minim nisi\",\n      \"deprecation\": \"quis adipisicing do\",\n      \"profile\": \"nostrud\",\n      \"name\": \"quis ex culpa\",\n      \"templated\": false\n    }\n  }\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "dolor esse id cillum",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "put Item Resource-user-put",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/hal+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"authId\": \"jbiydbdjnd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hrefUser}}",
+							"host": [
+								"{{hrefUser}}"
+							]
+						},
+						"description": "update-user"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"authId\": \"sint consectetur commodo\",\n  \"cats\": [\n    \"consequat amet cupidatat laborum eu\",\n    \"cillum labore quis\"\n  ],\n  \"friends\": [\n    {\n      \"authId\": \"officia proident\",\n      \"cats\": [\n        \"nulla id\",\n        \"labore eiusmod occaecat\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    },\n    {\n      \"authId\": \"laboris velit in off\",\n      \"cats\": [\n        \"ea in\",\n        \"reprehenderit nulla ad\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "dolor esse id cillum",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"authId\": \"nulla cillum cupidatat\",\n  \"cats\": [\n    \"incididunt \",\n    \"non ad ullamco sit\"\n  ],\n  \"friends\": [\n    {\n      \"authId\": \"cillum ut deserunt dolor\",\n      \"cats\": [\n        \"labore enim\",\n        \"minim nulla veniam\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    },\n    {\n      \"authId\": \"in adipisicing amet\",\n      \"cats\": [\n        \"minim aute consequat la\",\n        \"in\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    }\n  ],\n  \"_links\": {\n    \"consectetur_7f0\": {\n      \"href\": \"magna fugiat\",\n      \"hreflang\": \"consequat\",\n      \"title\": \"magna\",\n      \"type\": \"minim nisi\",\n      \"deprecation\": \"quis adipisicing do\",\n      \"profile\": \"nostrud\",\n      \"name\": \"quis ex culpa\",\n      \"templated\": false\n    }\n  }\n}"
+						},
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"authId\": \"sint consectetur commodo\",\n  \"cats\": [\n    \"consequat amet cupidatat laborum eu\",\n    \"cillum labore quis\"\n  ],\n  \"friends\": [\n    {\n      \"authId\": \"officia proident\",\n      \"cats\": [\n        \"nulla id\",\n        \"labore eiusmod occaecat\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    },\n    {\n      \"authId\": \"laboris velit in off\",\n      \"cats\": [\n        \"ea in\",\n        \"reprehenderit nulla ad\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "dolor esse id cillum",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"authId\": \"nulla cillum cupidatat\",\n  \"cats\": [\n    \"incididunt \",\n    \"non ad ullamco sit\"\n  ],\n  \"friends\": [\n    {\n      \"authId\": \"cillum ut deserunt dolor\",\n      \"cats\": [\n        \"labore enim\",\n        \"minim nulla veniam\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    },\n    {\n      \"authId\": \"in adipisicing amet\",\n      \"cats\": [\n        \"minim aute consequat la\",\n        \"in\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    }\n  ],\n  \"_links\": {\n    \"consectetur_7f0\": {\n      \"href\": \"magna fugiat\",\n      \"hreflang\": \"consequat\",\n      \"title\": \"magna\",\n      \"type\": \"minim nisi\",\n      \"deprecation\": \"quis adipisicing do\",\n      \"profile\": \"nostrud\",\n      \"name\": \"quis ex culpa\",\n      \"templated\": false\n    }\n  }\n}"
+						},
+						{
+							"name": "No Content",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"authId\": \"sint consectetur commodo\",\n  \"cats\": [\n    \"consequat amet cupidatat laborum eu\",\n    \"cillum labore quis\"\n  ],\n  \"friends\": [\n    {\n      \"authId\": \"officia proident\",\n      \"cats\": [\n        \"nulla id\",\n        \"labore eiusmod occaecat\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    },\n    {\n      \"authId\": \"laboris velit in off\",\n      \"cats\": [\n        \"ea in\",\n        \"reprehenderit nulla ad\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "dolor esse id cillum",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "patch Item Resource-user-patch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/hal+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"authId\": \"sdsknfjknfdf\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hrefUser}}",
+							"host": [
+								"{{hrefUser}}"
+							]
+						},
+						"description": "patch-user"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"authId\": \"sint consectetur commodo\",\n  \"cats\": [\n    \"consequat amet cupidatat laborum eu\",\n    \"cillum labore quis\"\n  ],\n  \"friends\": [\n    {\n      \"authId\": \"officia proident\",\n      \"cats\": [\n        \"nulla id\",\n        \"labore eiusmod occaecat\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    },\n    {\n      \"authId\": \"laboris velit in off\",\n      \"cats\": [\n        \"ea in\",\n        \"reprehenderit nulla ad\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "dolor esse id cillum",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"authId\": \"nulla cillum cupidatat\",\n  \"cats\": [\n    \"incididunt \",\n    \"non ad ullamco sit\"\n  ],\n  \"friends\": [\n    {\n      \"authId\": \"cillum ut deserunt dolor\",\n      \"cats\": [\n        \"labore enim\",\n        \"minim nulla veniam\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    },\n    {\n      \"authId\": \"in adipisicing amet\",\n      \"cats\": [\n        \"minim aute consequat la\",\n        \"in\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    }\n  ],\n  \"_links\": {\n    \"consectetur_7f0\": {\n      \"href\": \"magna fugiat\",\n      \"hreflang\": \"consequat\",\n      \"title\": \"magna\",\n      \"type\": \"minim nisi\",\n      \"deprecation\": \"quis adipisicing do\",\n      \"profile\": \"nostrud\",\n      \"name\": \"quis ex culpa\",\n      \"templated\": false\n    }\n  }\n}"
+						},
+						{
+							"name": "No Content",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"authId\": \"sint consectetur commodo\",\n  \"cats\": [\n    \"consequat amet cupidatat laborum eu\",\n    \"cillum labore quis\"\n  ],\n  \"friends\": [\n    {\n      \"authId\": \"officia proident\",\n      \"cats\": [\n        \"nulla id\",\n        \"labore eiusmod occaecat\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    },\n    {\n      \"authId\": \"laboris velit in off\",\n      \"cats\": [\n        \"ea in\",\n        \"reprehenderit nulla ad\"\n      ],\n      \"friends\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n        }\n      ]\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "dolor esse id cillum",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "delete Item Resource-user-delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{hrefUser}}",
+							"host": [
+								"{{hrefUser}}"
+							]
+						},
+						"description": "delete-user"
+					},
+					"response": [
+						{
+							"name": "No Content",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "dolor esse id cillum",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "dolor esse id cillum",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "prefix",
+			"value": "/user-service",
+			"type": "string"
+		},
+		{
+			"key": "hrefUser",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
