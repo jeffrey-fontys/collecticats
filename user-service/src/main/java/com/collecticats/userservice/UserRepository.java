@@ -5,6 +5,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface UserRepository extends MongoRepository<User, String> {
 
-  User findByAuthId(@Param("authId") String id);
+  User findByAuthId(@Param("authId") String authId);
 
 }
