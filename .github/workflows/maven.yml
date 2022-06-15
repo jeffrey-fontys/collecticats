@@ -141,7 +141,7 @@ jobs:
       with:
         compose-file: "./tests/postman/docker-compose.yml"
       env:
-        PR_TAG: ${{ publish.steps.meta.outputs.tags[0] }}
+        PR_TAG: ${{ needs.publish.steps.meta.outputs.tags[0] }}
 
     - name: Run the API and Postman's tests
       run: |
